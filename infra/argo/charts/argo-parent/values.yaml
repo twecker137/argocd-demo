@@ -1,0 +1,4 @@
+argo-module:
+  replicaCount: 2
+  service:
+    port: 6077

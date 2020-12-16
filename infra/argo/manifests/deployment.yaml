@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: towe-deployment
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: towe
+  template:
+    spec:
+      initContainers:
+        - name: runner
+          image: library/alpine:latest
+          command:
+            - "/bin/sh"
+      containers:
+        - name: daemon
+          image: library/httpd:latest
+          lifecycle:
+            postStart:
+              httpGet:
+                port: 80
+          ports:
+            - name: web
+              containerPort: 80
+          tty: true
+          stdin: true
+    metadata:
+      labels:
+        app: towe
