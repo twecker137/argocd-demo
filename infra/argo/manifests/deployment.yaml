@@ -14,6 +14,8 @@ spec:
           image: library/alpine:latest
           command:
             - "/bin/sh"
+            - "sleep"
+            - "50"
       containers:
         - name: daemon
           image: library/httpd:latest
